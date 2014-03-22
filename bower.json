@@ -15,5 +15,6 @@
         "comparisons",
         "lib",
         "tools"
-    ]
+    ],
+	"keywords": ["mithril", "mvc", "framework"]
 }
