@@ -21,47 +21,30 @@
 				<div class="container">
 					<div class="row">
 						<div class="col(3,3,12)">
-							<h2 id="api">API (v0.1.2)</h2>
-							<h3 id="core">Core</h3>
+							<h2 id="core-topics">Core Topics</h2>
 							<ul>
-								<li><a href="mithril.html">m</a></li>
-								<li><a href="mithril.prop.html">m.prop</a></li>
-								<li><a href="mithril.withAttr.html">m.withAttr</a></li>
-								<li><a href="mithril.module.html">m.module</a></li>
-								<li><a href="mithril.trust.html">m.trust</a></li>
-								<li><a href="mithril.render.html">m.render</a></li>
-								<li><a href="mithril.redraw.html">m.redraw</a></li>
+								<li><a href="installation.html">Installation</a></li>
+								<li><a href="getting-started.html">Getting Started</a></li>
+								<li><a href="routing.html">Routing</a></li>
+								<li><a href="web-services.html">Web Services</a></li>
+								<li><a href="components.html">Components</a></li>
 							</ul>
-							<h3 id="routing">Routing</h3>
+							<h2 id="advanced-topics.html">Advanced Topics</h2>
 							<ul>
-								<li><a href="mithril.route.html">m.route</a>
-									<ul>
-										<li><a href="mithril.route.html#defining-routes">m.route(rootElement, defaultRoute, routes)</a></li>
-										<li><a href="mithril.route.html#redirecting">m.route(path)</a></li>
-										<li><a href="mithril.route.html#mode-abstraction">m.route(element)</a></li>
-										<li><a href="mithril.route.html#mode">m.route.mode</a></li>
-										<li><a href="mithril.route.html#param">m.route.param</a></li>
-									</ul>
-								</li>
+								<li><a href="compiling-templates.html">Compiling Templates</a></li>
+								<li><a href="auto-redrawing.html">The Auto-Redrawing System</a></li>
+								<li><a href="integration.html">Integrating with Other Libraries</a></li>
 							</ul>
-							<h3 id="data">Data</h3>
+							<h2 id="misc">Misc</h2>
 							<ul>
-								<li><a href="mithril.request.html">m.request</a></li>
-								<li><a href="mithril.deferred.html">m.deferred</a></li>
-								<li><a href="mithril.sync.html">m.sync</a></li>
-								<li><a href="mithril.computation.html">m.startComputation / m.endComputation</a></li>
-							</ul>
-							
-							<h2 id="archive">History</h2>
-							<ul>
-								<li><a href="roadmap.html">Roadmap</a></li>
-								<li><a href="change-log.html">Change log</a></li>
+								<li><a href="comparison.html">Differences from Other MVC Frameworks</a></li>
+								<li><a href="practices.html">Good Practices</a></li>
+								<li><a href="tools.html">Useful Tools</a></li>
 							</ul>
 						</div>
 						<div class="col(9,9,12)">
-							<h2 id="m-request">m.request</h2>
-<p>This is a high-level utility for working with web services, which allows writing asynchronous code relatively procedurally.</p>
-<p>By default, it assumes server responses are in JSON format and optionally instantiates a class with the response data.</p>
+							<h2 id="web-services">Web Services</h2>
+<p>Mithril provides a high-level utility for working with web services, which allows writing asynchronous code relatively procedurally.</p>
 <p>It provides a number of useful features out of the box:</p>
 <ul>
 <li>The ability to get an early reference to a container that will hold the asynchronous response</li>
@@ -92,7 +75,7 @@ m.request({method: &quot;GET&quot;, url: &quot;/user&quot;}).then(users)
 var doSomething = function() { /*...*/ }
 
 m.request({method: &quot;GET&quot;, url: &quot;/user&quot;}).then(users).then(doSomething)</code></pre>
-<p>While both basic assignment syntax and thennable syntax can be used to the same effect, typically it&#39;s recommended that you use the assignment syntax whenever possible, as it&#39;s easier to read.</p>
+<p>While both basic assignment syntax and thennable syntax can be used to the same effect, typically it&#39;s recommended that you use the assignment syntax in the first example whenever possible, as it&#39;s easier to read.</p>
 <p>The thennable mechanism is intended to be used in 3 ways:</p>
 <ul>
 <li>in the model layer: to process web service data in transformative ways (e.g. filtering a list based on a parameter that the web service doesn&#39;t support)</li>
@@ -212,123 +195,6 @@ var users = User.list();
     url: &quot;myfile.txt&quot;,
     deserialize: function(value) {return value;}
 });</code></pre>
-<hr>
-<h3 id="signature">Signature</h3>
-<p><a href="how-to-read-signatures.html">How to read signatures</a></p>
-<pre><code class="lang-clike">Promise request(XHROptions options)
-
-where:
-    Promise :: GetterSetter { Promise then(any successCallback(any value), any errorCallback(any value)) }
-    GetterSetter :: any getterSetter([any value])
-    XHROptions :: Object {
-        String method,
-        String url,
-        [String user,]
-        [String password,]
-        [Object&lt;any&gt; data,]
-        [Response unwrapSuccess(Response data),]
-        [Response unwrapError(Response data),]
-        [String serialize(any dataToSerialize),]
-        [any deserialize(String dataToDeserialize),]
-        [void type(Object&lt;any&gt; data),]
-        [void config(XMLHttpRequest xhr, XHROptions options)]
-    }
-    Response :: Object&lt;any&gt; | Array&lt;any&gt;</code></pre>
-<ul>
-<li><p><strong>XHROptions options</strong></p>
-<p>A map of options for the XMLHttpRequest</p>
-<ul>
-<li><p><strong>String method</strong></p>
-<p>The HTTP method. Must be either <code>&quot;GET&quot;</code>, <code>&quot;POST&quot;</code>, <code>&quot;PUT&quot;</code>, <code>&quot;DELETE&quot;</code>, <code>&quot;HEAD&quot;</code> or <code>&quot;OPTIONS&quot;</code></p>
-</li>
-<li><p><strong>String url</strong></p>
-<p>The URL to request. If the URL is not in the same domain as the application, the target server must be configured to accept cross-domain requests from the application&#39;s domain, i.e. its responses must include the header <code>Access-Control-Allow-Origin: *</code>.</p>
-</li>
-<li><p><strong>String user</strong> (optional)</p>
-<p>A user for HTTP authentication. Defaults to <code>undefined</code></p>
-</li>
-<li><p><strong>String password</strong> (optional)</p>
-<p>A password for HTTP authentication. Defaults to <code>undefined</code></p>
-</li>
-<li><p><strong>String password</strong> (optional)</p>
-<p>A password for HTTP authentication. Defaults to <code>undefined</code></p>
-</li>
-<li><p><strong>Object<any> data</strong> (optional)</p>
-<p>Data to be sent. It&#39;s automatically placed in the appropriate section of the request with the appropriate serialization based on <code>method</code></p>
-</li>
-<li><p><strong>Response unwrapSuccess(Response data)</strong> (optional)</p>
-<p>A preprocessor function to extract the data from a success response in case the response contains metadata wrapping the data.</p>
-<p>The default value (if this parameter is falsy) is the identity function <code>function(value) {return value}</code></p>
-<p>For example, if the response is <code>{data: [{name: &quot;John&quot;}, {name: &quot;Mary&quot;}]}</code> and the unwrap function is <code>function(response) {return response.data}</code>, then the response will be considered to be <code>[{name: &quot;John&quot;}, {name: &quot;Mary&quot;}]</code> when processing the <code>type</code> parameter</p>
-<ul>
-<li><p><strong>Object<any> | Array<any> data</strong></p>
-<p>The data to unwrap</p>
-</li>
-<li><p><strong>returns Object<any> | Array<any> unwrappedData</strong></p>
-<p>The unwrapped data</p>
-</li>
-</ul>
-</li>
-<li><p><strong>String unwrapError(Response data)</strong> (optional)</p>
-<p>A preprocessor function to extract the data from an error response in case the response contains metadata wrapping the data.</p>
-<p>The default value (if this parameter is falsy) is the identity function <code>function(value) {return value}</code></p>
-<ul>
-<li><p><strong>Object<any> | Array<any> data</strong></p>
-<p>The data to unwrap</p>
-</li>
-<li><p><strong>returns Object<any> | Array<any> unwrappedData</strong></p>
-<p>The unwrapped data</p>
-</li>
-</ul>
-</li>
-<li><p><strong>String serialize(any dataToSerialize)</strong> (optional)</p>
-<p>Method to use to serialize the request data</p>
-<p>The default value (if this parameter is falsy) is <code>JSON.stringify</code></p>
-<ul>
-<li><p><strong>any dataToSerialize</strong></p>
-<p>Data to be serialized</p>
-</li>
-<li><p><strong>returns String serializedData</strong></p>
-</li>
-</ul>
-</li>
-<li><p><strong>any deserialize(String dataToDeserialize)</strong> (optional)</p>
-<p>Method to use to deserialize the response data</p>
-<p>The default value (if this parameter is falsy) is <code>JSON.parse</code></p>
-<ul>
-<li><p><strong>String dataToDeserialize</strong></p>
-<p>Data to be deserialized</p>
-</li>
-<li><p><strong>returns any deserializedData</strong></p>
-</li>
-</ul>
-</li>
-<li><p><strong>void type(Object<any> data)</strong> (optional)</p>
-<p>The response object (or the child items if this object is an Array) will be passed as a parameter to the class constructor defined by <code>type</code></p>
-<p>If this parameter is falsy, the deserialized data will not be wrapped.</p>
-<p>For example, if <code>type</code> is the following class:</p>
-<pre><code class="lang-javascript">var User = function(data) {
-  this.name = m.prop(data.name);
-}</code></pre>
-<p>And the data is <code>[{name: &quot;John&quot;}, {name: &quot;Mary&quot;}]</code>, then the response will contain an array of two User instances.</p>
-</li>
-<li><p><strong>void config(XMLHttpRequest xhr, XHROptions options)</strong> (optional)</p>
-<p>An initialization function that runs after <code>open</code> and before <code>send</code>. Useful for adding request headers and when using XHR2 features, such as the XMLHttpRequest&#39;s <code>upload</code> property.</p>
-<ul>
-<li><p><strong>XMLHttpRequest xhr</strong></p>
-<p>The XMLHttpRequest instance.</p>
-</li>
-<li><p><strong>XHROptions options</strong></p>
-<p>The <code>options</code> parameter that was passed into <code>m.request</code> call</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>returns Promise promise</strong></p>
-<p>returns a promise that can bind callbacks which get called on completion of the AJAX request.</p>
-</li>
-</ul>
 
 						</div>
 					</div>
