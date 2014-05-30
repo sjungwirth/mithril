@@ -70,7 +70,7 @@ var dashboard = {
         this.id = m.route.param(&quot;userID&quot;);
     },
     view: function(controller) {
-        m.render(&quot;body&quot;, controller.id);
+        return m(&quot;div&quot;, controller.id);
     }
 }
 
