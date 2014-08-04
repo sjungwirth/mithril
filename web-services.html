@@ -138,7 +138,7 @@ var controller = function() {
 </ul>
 <p>In the example below, we take advantage of queuing to debug the AJAX response data prior to doing further processing on the user list:</p>
 <pre><code class="lang-javascript">var users = m.request({method: &quot;GET&quot;, url: &quot;/user&quot;})
-    .then(log);
+    .then(log)
     .then(function(users) {
         //add one more user to the response
         return users.concat({name: &quot;Jane&quot;})
