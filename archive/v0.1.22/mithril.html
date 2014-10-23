@@ -191,7 +191,7 @@ var name = m.prop(&quot;&quot;)
 
 //binding the data store in a view
 m(&quot;input&quot;, {oninput: m.withAttr(&quot;value&quot;, name), value: name()})</code></pre>
-<p>In the code above, the <code>oninput</code> event handler updates the <code>name</code> getter-setter, and the Mithril auto-redrawing system redraws the template in order to update the displayed value. You can read more about the <a href="mithril.prop.html"><code>m.prop</code> getter-setter utility here</a> and the <a href="mithril.withattr.html"><code>m.withAttr</code> event handler factory here</a>. You can also <a href="auto-redrawing.html">learn how the redrawing system works here</a>.</p>
+<p>In the code above, the <code>oninput</code> event handler updates the <code>name</code> getter-setter, and the Mithril auto-redrawing system redraws the template in order to update the displayed value. You can read more about the <a href="mithril.prop.html"><code>m.prop</code> getter-setter utility here</a> and the <a href="mithril.withAttr.html"><code>m.withAttr</code> event handler factory here</a>. You can also <a href="auto-redrawing.html">learn how the redrawing system works here</a>.</p>
 <p>Note that Mithril always considers the model layer data to be canonical. This means that in the code below, the input on screen will overwritten by the model data any time a redraw happens:</p>
 <pre><code class="lang-javascript">//note that we are not updating the value of the `name` getter-setter via an event handler
 //redraws will always overwrite the current UI value with the value of `name()`
